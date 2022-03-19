@@ -20,8 +20,8 @@ namespace PlatformService.Data
 
                 context.Platforms.AddRange
                 (
-                    new Platform() { Name = "Kubernetes"},
-                    new Platform() { Name = "Dot Net"}
+                    new Platform() { Name = "Kubernetes", Cost = "Free", Publisher = "Microsoft"},
+                    new Platform() { Name = "Dot Net", Cost = "Free", Publisher = "Google"}
                 );
 
                 context.SaveChanges();
