@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PlatformService.Data;
+using PlatformService.SyncDataServices.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseInMemoryDatabase("InMem");
 });
-
+builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
+Console.WriteLine($" ---> Command Service endpoint: {builder.Configuration["CommandService"]}");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,7 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 DbPrep.PreparePopulation(app);
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
