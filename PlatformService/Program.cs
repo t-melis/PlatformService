@@ -24,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 DbPrep.PreparePopulation(app);
 app.UseHttpsRedirection();
 

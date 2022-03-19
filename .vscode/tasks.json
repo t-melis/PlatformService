@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/PlatformService.csproj",
+                "${workspaceFolder}/PlatformService/PlatformService.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/PlatformService.csproj",
+                "${workspaceFolder}/PlatformService/PlatformService.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/PlatformService.csproj"
+                "${workspaceFolder}/PlatformService/PlatformService.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

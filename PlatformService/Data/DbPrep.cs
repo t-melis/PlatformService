@@ -4,7 +4,7 @@ namespace PlatformService.Data
 {
     public static class DbPrep
     {
-        public static void PrepatePopulation(IApplicationBuilder app)
+        public static void PreparePopulation(IApplicationBuilder app)
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
