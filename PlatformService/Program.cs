@@ -12,10 +12,23 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
+if (builder.Environment.IsDevelopment())
 {
-    options.UseInMemoryDatabase("InMem");
-});
+    builder.Services.AddDbContext<ApplicationDbContext>(options => 
+    {
+        options.UseInMemoryDatabase("InMem");
+    });
+}
+else if (builder.Environment.IsProduction())
+{
+    Console.WriteLine("---> Using Sql Server");
+    builder.Services.AddDbContext<ApplicationDbContext>(options => 
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConn"));
+    });
+}
+
+
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 Console.WriteLine($" ---> Command Service endpoint: {builder.Configuration["CommandService"]}");
 var app = builder.Build();
@@ -25,9 +38,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
 }
 
-DbPrep.PreparePopulation(app);
+DbPrep.PreparePopulation(app, app.Environment.IsProduction());
 // app.UseHttpsRedirection();
 
 app.UseAuthorization();
